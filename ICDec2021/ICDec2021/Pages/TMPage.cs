@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ICDec2021.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,33 +27,35 @@ namespace ICDec2021.Pages
 
             //Identify code input textbox and enter the valid code
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
-            codeTextbox.SendKeys("10");
+            codeTextbox.SendKeys("1");
 
             //Identify description textbox and enter the valid description
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
-            descriptionTextbox.SendKeys("10");
+            descriptionTextbox.SendKeys("1");
 
             //Identify Priceperunit textbox and enter the valid price
             IWebElement priceTag = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
             priceTag.Click();
 
             IWebElement priceperunitTextbox = driver.FindElement(By.Id("Price"));
-            priceperunitTextbox.SendKeys("10");
+            priceperunitTextbox.SendKeys("1");
 
             //Identify the save button and click
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
             Thread.Sleep(10000);
+            //wait.WaitToBeClickable(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 15);
 
             //Identify the lastpage button and click
             IWebElement lastpageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastpageButton.Click();
-            Thread.Sleep(2000);
+            //wait.WaitToBeClickable(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
+            Thread.Sleep(15000);
 
             //Identify the entered record and check if it has expected value
             IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-
-            if (actualCode.Text == "10")
+            
+            if (actualCode.Text == "1")
             {
                 Console.WriteLine("Material record succesfully created.Test Passed!");
             }
@@ -61,7 +64,6 @@ namespace ICDec2021.Pages
             {
                 Console.WriteLine("Test Failed!");
             }
-
 
         }
         public void EditTM(IWebDriver driver)
@@ -82,12 +84,12 @@ namespace ICDec2021.Pages
             //Identify code textbox and enter the valid code
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
             codeTextbox.Clear();
-            codeTextbox.SendKeys("2edit");
+            codeTextbox.SendKeys("2");
 
             //Identify description textbox and enter the valid description
             IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
             descriptionTextbox.Clear();
-            descriptionTextbox.SendKeys("2edit");
+            descriptionTextbox.SendKeys("2");
 
             //Identify price textbox and enter the valid price
             IWebElement priceTag = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
@@ -107,12 +109,12 @@ namespace ICDec2021.Pages
             //Identify the lastpage button and click
             IWebElement lastpageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             lastpageButton.Click();
-            Thread.Sleep(6000);
+            Thread.Sleep(10000);
 
             //Identify the edited record and check if it has expected value
             IWebElement editCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (editCode.Text == "2edit")
+            if (editCode.Text == "2")
             {
                 Console.WriteLine("Material record succesfully edited.Test Passed!");
             }
